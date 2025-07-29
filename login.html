@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FinanzasPRO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <link rel="stylesheet" href="assets/css/stylelogin.css">
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-illustration">
+            <img src="./assets/images/finanzas.jpg" alt="Finanzas">
+        </div>
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Bienvenido a FinanzasPRO</h1>
+                <p>Inicia sesión para gestionar tus finanzas</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="login-btn">Iniciar Sesión</button>
+                <p id="error-message">Usuario o contraseña incorrectos</p>
+                <p class="register-link">¿No tienes una cuenta? <a href="register.html">Regístrate aquí</a></p>
+            </form>
+        </div>
+    </div>
+    <script src="js/auth.js"></script>
+</body>
+</html>
