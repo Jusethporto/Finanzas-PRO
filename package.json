@@ -1,0 +1,18 @@
+{
+  "name": "finanzaspro",
+  "version": "1.0.0",
+  "description": "**## Nombre:** Juseth David Porto Franco  **## Fecha:** 29/07/2025  **## Correo:** juseth.porto2@gmail.com",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0"
+  }
+}
