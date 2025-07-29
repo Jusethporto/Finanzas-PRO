@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanzasPRO</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <script>
+        // Verificación de sesión antes de cargar la página
+        if (localStorage.getItem('sesionIniciada') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1 id="inicio-btn" style="cursor: pointer;">FinanzasPRO</h1>
+        <button id="logout-btn">Cerrar Sesión</button>
+    </header>
+
+    <main class="container">
+        <section id="balance-section">
+            <h2>Balance</h2>
+            <div class="balance-details">
+                <div>
+                    <p>Ganancias</p>
+                    <p id="ganancias-total" class="ganancia">$0.00</p>
+                </div>
+                <div>
+                    <p>Gastos</p>
+                    <p id="gastos-total" class="gasto">$0.00</p>
+                </div>
+                <div>
+                    <p>Total</p>
+                    <p id="total-general">$0.00</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="operaciones-section">
+            <div class="main-controls">
+                <button id="categorias-btn">Categorías</button>
+                <button id="reportes-btn">Reportes</button>
+            </div>
+
+            <div class="operaciones-header">
+                <h2>Operaciones</h2>
+                <button id="nueva-operacion-btn">+ Nueva operación</button>
+            </div>
+            <div id="filtros">
+                <h3>Filtros</h3>
+                <div class="filtros-controles">
+                    <div>
+                        <label for="filtro-tipo">Tipo</label>
+                        <select id="filtro-tipo">
+                            <option value="todos">Todos</option>
+                            <option value="ganancia">Ganancia</option>
+                            <option value="gasto">Gasto</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="filtro-categoria">Categoría</label>
+                        <select id="filtro-categoria">
+                            <!-- Categorías se cargarán aquí -->
+                        </select>
+                    </div>
+                    <div>
+                        <label for="filtro-fecha">Desde</label>
+                        <input type="date" id="filtro-fecha">
+                    </div>
+                    <div>
+                        <label for="filtro-ordenar">Ordenar por</label>
+                        <select id="filtro-ordenar">
+                            <option value="reciente">Más reciente</option>
+                            <option value="antiguo">Menos reciente</option>
+                            <option value="mayor-monto">Mayor monto</option>
+                            <option value="menor-monto">Menor monto</option>
+                            <option value="a-z">A-Z</option>
+                            <option value="z-a">Z-A</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="lista-operaciones">
+                <!-- Las operaciones se agregarán dinámicamente aquí -->
+            </div>
+        </section>
+
+        <section id="nueva-operacion-section" class="hidden">
+            <h2>Nueva Operación</h2>
+            <form id="form-nueva-operacion">
+                <div>
+                    <label for="descripcion">Descripción</label>
+                    <input type="text" id="descripcion" required>
+                </div>
+                <div>
+                    <label for="monto">Monto</label>
+                    <input type="number" id="monto" required>
+                </div>
+                <div>
+                    <label for="tipo">Tipo</label>
+                    <select id="tipo">
+                        <option value="ganancia">Ganancia</option>
+                        <option value="gasto">Gasto</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria">
+                        <!-- Categorías se agregarán aquí -->
+                    </select>
+                </div>
+                <div>
+                    <label for="fecha">Fecha</label>
+                    <input type="date" id="fecha" required>
+                </div>
+                <button type="submit">Agregar</button>
+                <button type="button" id="cancelar-btn">Cancelar</button>
+            </form>
+        </section>
+
+        <section id="edicion-operacion-section" class="hidden">
+            <h2>Editar Operación</h2>
+            <form id="form-edicion-operacion">
+                <input type="hidden" id="edicion-id">
+                <div>
+                    <label for="edicion-descripcion">Descripción</label>
+                    <input type="text" id="edicion-descripcion" required>
+                </div>
+                <div>
+                    <label for="edicion-monto">Monto</label>
+                    <input type="number" id="edicion-monto" required>
+                </div>
+                <div>
+                    <label for="edicion-tipo">Tipo</label>
+                    <select id="edicion-tipo">
+                        <option value="ganancia">Ganancia</option>
+                        <option value="gasto">Gasto</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="edicion-categoria">Categoría</label>
+                    <select id="edicion-categoria">
+                        <!-- Categorías se cargarán aquí -->
+                    </select>
+                </div>
+                <div>
+                    <label for="edicion-fecha">Fecha</label>
+                    <input type="date" id="edicion-fecha" required>
+                </div>
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" id="cancelar-edicion-btn">Cancelar</button>
+            </form>
+        </section>
+    </main>
+
+    <section id="categorias-section" class="hidden">
+        <h2>Categorías</h2>
+        <form id="form-categoria">
+            <label for="nombre-categoria">Nombre</label>
+            <input type="text" id="nombre-categoria" required>
+            <input type="hidden" id="id-categoria">
+            <button type="submit">Guardar</button>
+        </form>
+        <div id="lista-categorias">
+            <!-- Las categorías se agregarán dinámicamente aquí -->
+        </div>
+    </section>
+
+        <section id="reportes-section" class="hidden">
+            <h2>Reportes</h2>
+            <div id="resumen-reportes"></div>
+            <h3>Totales por Categoría</h3>
+            <div id="reporte-por-categoria"></div>
+            <h3>Totales por Mes</h3>
+            <div id="reporte-por-mes"></div>
+        </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
